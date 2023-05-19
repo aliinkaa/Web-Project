@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>List</title>
+</head>
+
+<body>
+	<h2>List</h2>
+	<p>List of persons stored in our database:</p>
+	<div th:unless="${#lists.isEmpty(applicants)}">
+		<table class="box">
+			<tr>
+				<th></th>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Date of Birth</th>
+				<th>Phone</th>
+				<th>E-mail</th>
+				<th>Source</th>
+				<th></th>
+			</tr>
+			<tr th:each="a : ${applicants}">
+				<td><a th:href="'/applicant/delete/' + ${a.id}"><img src="/img/delete.png" width="20"></a></td>
+				<td th:text="${a.id}"></td>
+				<td th:text="${a.firstName}"></td>
+				<td th:text="${a.lastName}"></td>
+				<td th:text="${a.dateOfBirth}"></td>
+				<td th:text="${a.phone}"></td>
+				<td th:text="${a.email}"></td>
+				<td th:text="${a.source}"></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div th:if="${#lists.isEmpty(applicants)}">
+		<p class="small-italic">No data found.</p>
+	</div>
+	
+	<!--<p><a href="/list.html">Show List</a> | <a href="/new_person.html">Create New</a></p>-->
+</body>
+
+</html>

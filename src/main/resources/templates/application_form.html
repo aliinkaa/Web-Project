@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title th:text="#{form_title}"></title>
+</head>
+
+<body>
+    <div class="form">
+        <h1 style="font-weight: 300;" th:text="#{form_header1}"><strong th:text="#{form_strong}"></strong></h1>
+        <hr>
+        <div class="explanation">
+            <p><span th:text="#{form_body_top}"></span>
+                <br><br>
+                <span th:text="#{form_body_paragraph1}"></span>
+                <br><br>
+                <span th:text="#{form_body_paragraph2}"></span>
+                <br><br>
+                <strong><span th:text="#{form_body_warning1}"></span></strong></p>
+        </div>
+
+        <form action="/applicant/add" method="post" th:object="${applicant}">
+        <div class="input">
+          <span th:errors="*{firstName}" class="error"></span>
+          <div class="inputLine">
+            <label class="label" for="name"><span th:text="#{form_body_fname}"></span></label>
+            <input class="field" type="text" id="name" name="firstName">
+          </div>
+          
+          <span th:errors="*{lastName}" class="error"></span>
+          <br>
+          <div class="inputLine">
+            <label class="label" for="name"><span th:text="#{form_body_lname}"></span></label>
+            <input class="field" type="text" id="name" name="lastName">
+          </div>
+
+            <span th:errors="*{email}" class="error"></span>
+            <br>
+            <div class="inputLine">
+              <label class="label" for="mail"><span th:text="#{form_body_email}"></span></label>
+              <input class="field" type="text" id="email" name="email">
+            </div>
+            
+            <span th:errors="*{phone}" class="error"></span>
+            <br>
+            <div class="inputLine">
+              <label class="label" for="phone"><span th:text="#{form_body_phone}"></span></label>
+              <input class="field" type="number" id="phone" name="phone" placeholder="5** *** ** **">
+            </div>
+            
+            <span th:errors="*{dateOfBirth}" class="error"></span>
+            <br>
+            <div class="inputLine">
+              <label class="label" for="birthday"><span th:text="#{form_body_dob}"></span></label>
+              <input class="field"type="date" id="birthday" name="dateOfBirth">
+            </div>
+            
+
+            <br>
+            <span th:errors="*{source}" class="error"></span>
+            <div class="inputLine">
+              <label class="label" for="hear"><span th:text="#{form_body_source}"></span></label>
+                  <div class="radiobuttonLine">
+                    <label class="radiolabel" >
+                      <input type="radio" name="radOption" th:field="*{source}" value="socials">
+                      <span th:text="#{form_rbtn_social}"></span>
+                    </label>
+                    
+                    <label class="radiolabel">
+                      <input   type="radio" name="radOption" th:field="*{source}" value="friends">
+                      <span th:text="#{form_rbtn_friend}"></span>
+                    </label>
+                    
+                    <label class="radiolabel">
+                      <input   type="radio" name="radOption" th:field="*{source}" value="adds">
+                      <span th:text="#{form_rbtn_ads}"></span>
+                    </label>
+                 </div>  
+             </div>
+             <br>
+             <!--<label class="label" for="hear"><span th:text="#{form_body_interests}"></span></label>
+                  <div class="radiobuttonLine" style="margin-top: 10px;">
+                    <label class="radiolabel" >
+                      <input type="checkbox" th:field="*{checkBoxSelection}" value="HTML"><span>HTML</span>
+                    </label>
+
+                    <label class="radiolabel" >
+                      <input type="checkbox" th:field="*{checkBoxSelection}" value="CSS"><span>CSS</span>
+                    </label>
+
+                    <label class="radiolabel" >
+                      <input type="checkbox" th:field="*{checkBoxSelection}" value="React"><span>React</span>
+                    </label>
+
+                    <label class="radiolabel" >
+                      <input type="checkbox" th:field="*{checkBoxSelection}" value="Spring Boot"><span>Spring Boot</span>
+                    </label>
+
+                    <label class="radiolabel" >
+                      <input type="checkbox" th:field="*{checkBoxSelection}" value="ASP.NET MVC"><span>ASP.NET MVC</span>
+                    </label>
+
+                 </div>-->
+                 <input id="submit-button" type="submit" th:value="#{form_body_submit_button}">
+                 <h3 style="font-style: italic; font-size: 13px;"><span th:text="#{form_body_warning2}"></span></h3>
+                 <br>
+                 <span class="database"></span><span th:if="${#locale.language == 'en'}"><a href = "?language=tr"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a href = "?language=en"><img src="/img/english.svg.png" width="25"></a></span> | <a class="database" href="/list-applicants"><span th:text="#{form_db_list}"></span></a> | <a class="database" href="/applicant/new"><span th:text="#{form_db_form}"></a></span>
+                </div>
+              </div>
+            </form>
+      
+        <h3><span th:text="#{form_header2}"></span></h3>
+    </div>
+</body>
+</html>
