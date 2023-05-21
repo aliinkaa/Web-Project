@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/styles.css">
+        <title th:text="#{db_title}"></title>
+    </head>
+    
+    <body>
+        <div class="form" style="height: 600px">
+
+           <h1 style="font-weight: 300;"><span th:text="#{db_h1_1}"></span> <strong><span th:text="#{db_h1_2}"></span></strong></h1>
+           <hr>
+           <h3 class="explanation"><span th:text="#{db_h2}"></span></h3>
+            
+           <div th:unless="${#lists.isEmpty(applicants)}">
+           <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th><span th:text="#{db_body_id}"></span></th>
+                <th><span th:text="#{db_body_fullName}"></span></th>
+                <th><span th:text="#{db_body_email}"></span></th>
+                <th><span th:text="#{db_body_phone}"></span></th>
+                <th><span th:text="#{db_body_dob}"></span></th>
+                <th><span th:text="#{db_body_age}"></span></th>
+                <th><span th:text="#{db_body_source}"></span></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr class="data-row" th:each="a : ${applicants}">
+                    <td><a th:href="'/applicant/delete/' + ${a.id}"><img src="/img/delete.png" width="20"></a></td>
+                    <td><span th:text="${a.id}"></span></td>
+                    <td><span th:text="${a.firstName} + ' ' + ${a.lastName}"></span></td>
+                    <td><span th:text="${a.email}"></span></td>
+                    <td><span th:text="${a.phone}"></span></td>
+                    <td><span th:text="${a.dateOfBirth}"></span></td>
+                    <td><span th:text="${a.applicantAge}"></span></td>
+                    <td><span th:text="${a.source}"></span></td>
+                    <td><a th:href="'/applicant/view/' + ${a.id}"><img src="/img/view.png" width="20"></a></td>
+                    <td><a th:href="'/applicant/edit/' + ${a.id}"><img src="/img/edit.png" width="20"></a></td>
+                </tr>
+                <!--------list resource buraya sanırım emin değilim, table'ın stili hazır styles.css line201'den itibaren------------->
+            </tbody>
+            </div>
+            <div th:if="${#lists.isEmpty(applicants)}">
+                <p class="small-italic"><span th:text="#{db_noData}"></span></p>
+            </div>
+          </table>
+            
+
+           
+
+           <p style="padding-top: 10px;" class="database"><span th:if="${#locale.language == 'en'}"><a th:href = "@{'/list-applicants' + '?language=tr'}"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a th:href = "@{'/list-applicants' + '?language=en'}"><img src="/img/english.svg.png" width="25"></a></span> | <a class="database" href="/applicant/new"><span th:text="#{applicant_form}"></span></a></p>
+           
+            
+            <h3 style="margin-top: 230px;"><span th:text="#{group}"></span></h3>
+           
+        </div>
+        
+        
+    </body>
+</html>

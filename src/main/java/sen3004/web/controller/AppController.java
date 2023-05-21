@@ -40,10 +40,43 @@ public class AppController {
 
 		if (result.hasErrors())
 			mv.setViewName("application_form");
-		else {
-			mv.setViewName("person-list");
+		else 
+		{
+			mv.setViewName("application_result");
 			service.createApplicant(applicant);
-			mv.addObject("applicants", service.findAllApplicants());
+			mv.addObject("applicant", applicant);
+		}
+
+		return mv;
+	}
+
+	@PostMapping("/applicant/update/{id}")
+	public ModelAndView updateApplicant(@PathVariable long id, @Valid @ModelAttribute Applicant applicant, BindingResult result) {
+		ModelAndView mv = new ModelAndView();
+
+		//applicant = service.findApplicantById(id);
+		mv.addObject("applicant", applicant);
+
+		ageValidator.validate(applicant, result);
+
+		if (result.hasErrors())
+			mv.setViewName("applicant_edit");
+		else 
+		{
+			Applicant oldApplicant = service.findApplicantById(id);	
+			if(oldApplicant != null)
+			{
+				oldApplicant.setFirstName(applicant.getFirstName());
+				oldApplicant.setLastName(applicant.getLastName());
+				oldApplicant.setEmail(applicant.getEmail());
+				oldApplicant.setPhone(applicant.getPhone());
+				oldApplicant.setSource(applicant.getSource());
+				oldApplicant.setDateOfBirth(applicant.getDateOfBirth());
+				service.updateApplicant(oldApplicant);
+				mv.setViewName("applicant_view");
+				mv.addObject("applicant", oldApplicant);
+			}
+			
 		}
 
 		return mv;
@@ -51,7 +84,7 @@ public class AppController {
 
 	@GetMapping({ "/list-applicants"})
 	public ModelAndView list() {
-		ModelAndView mv = new ModelAndView("person-list");
+		ModelAndView mv = new ModelAndView("applicant_list");
 		mv.addObject("applicants", service.findAllApplicants());
 
 		return mv;
@@ -67,7 +100,16 @@ public class AppController {
 
 	@GetMapping({ "/applicant/view/{id}"})
 	public ModelAndView viewApplicant(@PathVariable long id) {
-		ModelAndView mv = new ModelAndView("view-person");
+		ModelAndView mv = new ModelAndView("applicant_view");
+		Applicant applicant = service.findApplicantById(id);
+		mv.addObject("applicant", applicant);
+
+		return mv;
+	}
+
+	@GetMapping({ "/applicant/edit/{id}"})
+	public ModelAndView editApplicant(@PathVariable long id) {
+		ModelAndView mv = new ModelAndView("applicant_edit");
 		Applicant applicant = service.findApplicantById(id);
 		mv.addObject("applicant", applicant);
 
@@ -76,7 +118,7 @@ public class AppController {
 
 	@GetMapping("/applicant/delete/{id}")
 	public ModelAndView deleteApplicant(@PathVariable long id) {
-		ModelAndView mv = new ModelAndView("person-list");
+		ModelAndView mv = new ModelAndView("applicant_list");
 		service.deleteApplicant(id);
 		mv.addObject("applicants", service.findAllApplicants()); 
 		return mv;

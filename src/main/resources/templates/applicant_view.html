@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/css/styles.css">
+        <meta charset="UTF-8">
+        <title th:text="#{view_title}"></title> 
+    </head>
+    
+    <body>
+        <div class="form">
+            <h1 style="font-weight: 300;"><span th:text="#{view_h1_1}"></span><strong> <span th:text="#{view_h1_2}"></span></strong></h1>
+            <hr>
+            
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span th:text="#{db_body_id}"></span></th>
+                            <th><span th:text="#{db_body_fullName}"></span></th>
+                            <th><span th:text="#{db_body_email}"></span></th>
+                            <th><span th:text="#{db_body_phone}"></span></th>
+                            <th><span th:text="#{db_body_dob}"></span></th>
+                            <th><span th:text="#{db_body_age}"></span></th>
+                            <th><span th:text="#{db_body_source}"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span th:text="${applicant.id}"></span></td>
+                            <td><span th:text="${applicant.firstName} + ' ' + ${applicant.lastName}"></span></td>
+                            <td><span th:text="${applicant.email}"></span></td>
+                            <td><span th:text="${applicant.phone}"></span></td>
+                            <td><span th:text="${#temporals.format(applicant.dateOfBirth, 'dd.MM.yyyy')}"></span></td>
+                            <td><span th:text="${applicant.applicantAge}"></span></td>
+                            <td><span th:text="${applicant.source}"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <br>
+            <p><span th:if="${#locale.language == 'en'}"><a href = "?language=tr"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a href = "?language=en"><img src="/img/english.svg.png" width="25"></a></span> | <a href="/list-applicants"><span th:text="#{go_back}"></span></a></p>
+            
+            <h3 style="margin-top: 70px;"><span th:text="#{group}"></span></h3>
+           
+        </div>
+        
+        
+    </body>
+</html>

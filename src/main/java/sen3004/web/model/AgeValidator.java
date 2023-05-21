@@ -19,7 +19,7 @@ public class AgeValidator implements Validator
     public void validate(Object target, Errors errors)
     {
         Applicant applicant = (Applicant) target;
-
+        //System.out.println("imdat");
         //calculating age.
         if(applicant.getDateOfBirth() == null)
         {

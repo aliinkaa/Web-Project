@@ -54,7 +54,7 @@
             <br>
             <div class="inputLine">
               <label class="label" for="birthday"><span th:text="#{form_body_dob}"></span></label>
-              <input class="field"type="date" id="birthday" name="dateOfBirth">
+              <input class="field" type="date" id="birthday" name="dateOfBirth" th:placeholder="#{form_bd_placeholder}">
             </div>
             
 
@@ -64,17 +64,17 @@
               <label class="label" for="hear"><span th:text="#{form_body_source}"></span></label>
                   <div class="radiobuttonLine">
                     <label class="radiolabel" >
-                      <input type="radio" name="radOption" th:field="*{source}" value="socials">
+                      <input type="radio" name="radOption" th:field="*{source}" value="Socials">
                       <span th:text="#{form_rbtn_social}"></span>
                     </label>
                     
                     <label class="radiolabel">
-                      <input   type="radio" name="radOption" th:field="*{source}" value="friends">
+                      <input   type="radio" name="radOption" th:field="*{source}" value="Friends">
                       <span th:text="#{form_rbtn_friend}"></span>
                     </label>
                     
                     <label class="radiolabel">
-                      <input   type="radio" name="radOption" th:field="*{source}" value="adds">
+                      <input   type="radio" name="radOption" th:field="*{source}" value="Advertisement">
                       <span th:text="#{form_rbtn_ads}"></span>
                     </label>
                  </div>  
@@ -106,12 +106,12 @@
                  <input id="submit-button" type="submit" th:value="#{form_body_submit_button}">
                  <h3 style="font-style: italic; font-size: 13px;"><span th:text="#{form_body_warning2}"></span></h3>
                  <br>
-                 <span class="database"></span><span th:if="${#locale.language == 'en'}"><a href = "?language=tr"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a href = "?language=en"><img src="/img/english.svg.png" width="25"></a></span> | <a class="database" href="/list-applicants"><span th:text="#{form_db_list}"></span></a> | <a class="database" href="/applicant/new"><span th:text="#{form_db_form}"></a></span>
+                 <span class="database"></span><span th:if="${#locale.language == 'en'}"><a th:href = "@{'/applicant/new' + '?language=tr'}"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a th:href = "@{'/applicant/new' + '?language=en'}"><img src="/img/english.svg.png" width="25"></a></span> | <a class="database" href="/list-applicants"><span th:text="#{applicant_list}"></span></a></span>
                 </div>
               </div>
             </form>
       
-        <h3><span th:text="#{form_header2}"></span></h3>
+        <h3><span th:text="#{group}"></span></h3>
     </div>
 </body>
 </html>

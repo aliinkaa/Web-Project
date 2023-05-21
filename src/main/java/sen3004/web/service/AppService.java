@@ -37,4 +37,8 @@ public class AppService {
 		applicantRepository.delete(id);
 	}
 
+	public void updateApplicant(Applicant applicant){
+		applicantRepository.update(applicant);
+	}
+
 }

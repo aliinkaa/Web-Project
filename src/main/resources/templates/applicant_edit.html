@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title th:text="#{edit_title}"></title> 
+        <link rel="stylesheet" href="/css/styles.css">
+       
+    </head>
+    
+    <body>
+        <div class="form" style="height: 600px">
+
+           <h1 style="font-weight: 300;"><span th:text="#{edit_h1_1}"></span> <strong><span th:text="#{edit_h1_2}"></span></strong></h1>
+           <hr>
+           <h3 class="explanation"><span th:text="#{edit_h3}"></span></h3>
+
+           <!--action="/applicant/update/${applicant.id}"-->
+           <form th:action="@{'/applicant/update/' + ${id}}" method="post" th:object="${applicant}">
+            <div class="input">
+                <span th:errors="*{firstName}" class="error"></span>
+                <div class="inputLine">
+                  <label class="label" for="name"><span th:text="#{edit_fname}"></span></label>
+                  <input class="field" type="text" id="name" name="firstName">
+                </div>
+                
+                <span th:errors="*{lastName}" class="error"></span>
+                <br>
+                <div class="inputLine">
+                  <label class="label" for="name"><span th:text="#{edit_lname}"></span></label>
+                  <input class="field" type="text" id="name" name="lastName">
+                </div>
+      
+                  <span th:errors="*{email}" class="error"></span>
+                  <br>
+                  <div class="inputLine">
+                    <label class="label" for="mail"><span th:text="#{edit_email}"></span></label>
+                    <input class="field" type="text" id="email" name="email">
+                  </div>
+                  
+                  <span th:errors="*{phone}" class="error"></span>
+                  <br>
+                  <div class="inputLine">
+                    <label class="label" for="phone"><span th:text="#{edit_phone}"></span></label>
+                    <input class="field" type="number" id="phone" name="phone" placeholder="5** *** ** **">
+                  </div>
+                  
+                  <span th:errors="*{dateOfBirth}" class="error"></span>
+                  <br>
+                  <div class="inputLine">
+                    <label class="label" for="birthday"><span th:text="#{edit_dob}"></span></label>
+                    <input class="field" type="date" id="birthday" name="dateOfBirth" th:placeholder="#{form_bd_placeholder}">
+                  </div>
+                  
+      
+                  <br>
+                  <span th:errors="*{source}" class="error"></span>
+                  <div class="inputLine">
+                    <label class="label" for="hear"><span th:text="#{edit_source}"></span></label>
+                        <div class="radiobuttonLine">
+                          <label class="radiolabel" >
+                            <input type="radio" name="radOption" th:field="*{source}" value="Socials">
+                            <span th:text="#{form_rbtn_social}"></span>
+                          </label>
+                          
+                          <label class="radiolabel">
+                            <input   type="radio" name="radOption" th:field="*{source}" value="Friends">
+                            <span th:text="#{form_rbtn_friend}"></span>
+                          </label>
+                          
+                          <label class="radiolabel">
+                            <input   type="radio" name="radOption" th:field="*{source}" value="Advertisement">
+                            <span th:text="#{form_rbtn_ads}"></span>
+                          </label>
+                       </div>  
+                   </div>
+                   <br>
+        
+                </div>
+                <p style="padding-top: 10px;" class="database"> <span th:if="${#locale.language == 'en'}"><a th:href = "@{'/applicant/edit/' + ${applicant.id} + '?language=tr'}"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a th:href = "@{'/applicant/edit/' + ${applicant.id} + '?language=en'}"><img src="/img/english.svg.png" width="25"></a></span> | <a class="database" href="/applicant/new"><span th:text="#{applicant_form}"></span></a> | <a class="database" href="/list-applicants"><span th:text="#{go_back}"></span></a></p>
+                <input style="margin-top: 30px;" id="submit-button" type="submit" th:value="#{edit_button}">
+           </form>
+            <!--<div class="input">
+                <div class="inputLine">
+                    <label class="label" for="name">Full Name *</label>
+                    <input class="field" type="text" id="name" name="name">
+                </div>
+                    
+        
+                <br>
+                <div class="inputLine">
+                    <label class="label" for="mail">E-mail *</label>
+                    <input class="field" type="text" id="email" name="email">
+                 </div>
+                
+                <br>
+                <div class="inputLine">
+                    <label class="label" fsor="phone">Phone</label>
+                    <input class="field" type="number" id="phone" name="phone" placeholder="5** *** ** **">
+                </div>
+                <br>
+                <div class="inputLine">
+                    <label class="label" for="birthday">Birthday *</label>
+                    <input class="field"type="date" id="birthday" name="birthday">
+                </div>
+           </div>-->
+
+
+           
+            
+            <h3 style="margin-top: 230px;"><span th:text="#{group}"></span></h3>
+           
+        </div>
+        
+        
+    </body>
+</html>

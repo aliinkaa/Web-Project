@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/css/styles.css">
+        <meta charset="UTF-8">
+        <title th:text="#{result_title}"></title> 
+    </head>
+    
+    <body>
+        <div class="form">
+            <h1 style="font-weight: 300;"><span th:text="#{result_h1_1}"></span> <strong><span th:text="#{result_h2_2}"></span></strong></h1>
+            <hr>
+            <div class="icon">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+                <i class="material-symbols-outlined">
+                    done
+                </i>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th><span th:text="#{db_body_fullName}"></span></th>
+                            <th><span th:text="#{db_body_email}"></span></th>
+                            <th><span th:text="#{db_body_phone}"></span></th>
+                            <th><span th:text="#{db_body_dob}"></span></th>
+                            <th><span th:text="#{db_body_source}"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span th:text="${applicant.firstName} + ' ' + ${applicant.lastName}"></span></td>
+                            <td><span th:text="${applicant.email}"></span></td>
+                            <td><span th:text="${applicant.phone}"></span></td>
+                            <td><span th:text="${#temporals.format(applicant.dateOfBirth, 'dd.MM.yyyy')}"></span></td>
+                            <!--<td><span th:text="${applicant.dateOfBirth}"></span></td>-->
+                            <td><span th:text="${applicant.source}"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="line-height: 25px; font-size: 16px;font-style: normal; color:#383737; margin-top: 420px; text-align: center;">
+                <span th:text="#{result_p1}"></span>
+                <br>
+                <strong><span th:text="#{result_p2}"></span></strong> 
+                <br>
+                <span th:text="#{result_p3_1} + ' '"></span><a style="font-size: 16px;" class="database" href="mailto: info@sen3004"><span th:text="#{result_p3_2}"></span></a><span th:text="' ' + #{result_p3_3}"></span>
+            </p>
+            
+            <br>
+            <p><span th:if="${#locale.language == 'en'}"><a href = "?language=tr"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a href = "?language=en"><img src="/img/english.svg.png" width="25"></a></span> | <a href="/applicant/new"><span th:text="#{applicant_form}"></span></a> | <a href="/list-applicants"><span th:text="#{applicant_list}"></span></a></p>
+            
+            <h3 style="margin-top: 70px;"><span th:text="#{group}"></span></h3>
+           
+        </div>
+        
+        
+    </body>
+</html>
