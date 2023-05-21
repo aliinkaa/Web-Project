@@ -26,6 +26,7 @@
                 <th><span th:text="#{db_body_dob}"></span></th>
                 <th><span th:text="#{db_body_age}"></span></th>
                 <th><span th:text="#{db_body_source}"></span></th>
+                <th><span th:text="Interests"></span></th>
                 <th></th>
                 <th></th>
               </tr>
@@ -40,6 +41,12 @@
                     <td><span th:text="${a.dateOfBirth}"></span></td>
                     <td><span th:text="${a.applicantAge}"></span></td>
                     <td><span th:text="${a.source}"></span></td>
+                    <td>
+                        <span th:each = "interest, status : ${a.interests}"> <!--repeats the span-->
+                            <span th:if = "${status.last}" th:text = "${interest.topic} + '.'"></span>
+                            <span th:unless = "${status.last}" th:text = "${interest.topic} + ', '"></span>
+                        </span>
+                    </td>
                     <td><a th:href="'/applicant/view/' + ${a.id}"><img src="/img/view.png" width="20"></a></td>
                     <td><a th:href="'/applicant/edit/' + ${a.id}"><img src="/img/edit.png" width="20"></a></td>
                 </tr>

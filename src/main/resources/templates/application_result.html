@@ -25,6 +25,7 @@
                             <th><span th:text="#{db_body_phone}"></span></th>
                             <th><span th:text="#{db_body_dob}"></span></th>
                             <th><span th:text="#{db_body_source}"></span></th>
+                            <th><span th:text="Interests"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,12 @@
                             <td><span th:text="${#temporals.format(applicant.dateOfBirth, 'dd.MM.yyyy')}"></span></td>
                             <!--<td><span th:text="${applicant.dateOfBirth}"></span></td>-->
                             <td><span th:text="${applicant.source}"></span></td>
+                            <td>
+                                <span th:each = "interest, status : ${applicant.interests}"> <!--repeats the span-->
+                                    <span th:if = "${status.last}" th:text = "${interest.topic} + '.'"></span>
+                                    <span th:unless = "${status.last}" th:text = "${interest.topic} + ', '"></span>
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

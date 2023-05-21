@@ -3,6 +3,8 @@ package sen3004.web.controller;
 import jakarta.validation.Valid;
 import sen3004.web.model.AgeValidator;
 import sen3004.web.model.Applicant;
+import sen3004.web.model.FormData;
+import sen3004.web.model.Interest;
 import sen3004.web.service.AppService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,16 @@ public class AppController {
 	public ModelAndView newApplicant() {
 		ModelAndView mv = new ModelAndView("application_form");
 		mv.addObject("applicant", new Applicant());
+		mv.addObject("formData", new FormData());
 
 		return mv;
 	}
 
 	@PostMapping("/applicant/add")
-	public ModelAndView addApplicant(@Valid @ModelAttribute Applicant applicant, BindingResult result) {
+	public ModelAndView addApplicant(@ModelAttribute FormData formData, @Valid @ModelAttribute Applicant applicant, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("applicant", applicant);
-
+		//applicant = service.findApplicantById(applicant.getId());
+		
 		ageValidator.validate(applicant, result);
 
 		if (result.hasErrors())
@@ -44,6 +47,24 @@ public class AppController {
 		{
 			mv.setViewName("application_result");
 			service.createApplicant(applicant);
+
+			if(formData.getCheckBoxSelection() != null && !formData.getCheckBoxSelection().isEmpty())
+			{
+				var checkBox = formData.getCheckBoxSelection();
+				for (String box : checkBox) 
+				{
+					Interest i = new Interest(applicant);
+					System.out.println("IMDAT " + i.getApplicant().getId());
+					i.setTopic(box);
+					//i.setApplicant(applicant);
+					service.createInterest(i);
+					//System.out.println("IMDAT " + applicant.getInterests().size());
+				}
+
+				service.refreshApplicant(applicant);
+				
+			}
+
 			mv.addObject("applicant", applicant);
 		}
 

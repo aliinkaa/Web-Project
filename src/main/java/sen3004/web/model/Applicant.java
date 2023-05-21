@@ -2,6 +2,8 @@ package sen3004.web.model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 import java.time.Clock;
 
 import jakarta.persistence.*;
@@ -51,6 +53,10 @@ public class Applicant {
 	@Size(min = 10, max=10)
 	//@NotEmpty
 	private String phone;
+
+	@OneToMany(mappedBy = "applicant", fetch=FetchType.EAGER)
+	@OrderBy("id")
+	private Set<Interest> interests = new HashSet<Interest>();
 
 	//private List<String> checkBoxSelection;
 
@@ -121,6 +127,14 @@ public class Applicant {
 	{
 		LocalDate currentDate = LocalDate.now(Clock.systemDefaultZone());
 		return Period.between(dateOfBirth, currentDate).getYears();
+	}
+
+	public Set<Interest> getInterests() {
+	return interests;
+	}
+
+	public void setInterests(Set<Interest> interests) {
+		this.interests = interests;
 	}
 
 	/*public Integer getExperience() {

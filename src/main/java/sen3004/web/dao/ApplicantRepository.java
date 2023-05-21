@@ -39,4 +39,9 @@ public class ApplicantRepository {
 		entityManager.merge(applicant);
 	}
 
+	public void refresh(Applicant applicant)
+	{
+		entityManager.refresh(applicant);
+	}
+
 }
