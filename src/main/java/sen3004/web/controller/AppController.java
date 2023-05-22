@@ -56,9 +56,7 @@ public class AppController {
 					Interest i = new Interest(applicant);
 					System.out.println("IMDAT " + i.getApplicant().getId());
 					i.setTopic(box);
-					//i.setApplicant(applicant);
 					service.createInterest(i);
-					//System.out.println("IMDAT " + applicant.getInterests().size());
 				}
 
 				service.refreshApplicant(applicant);
@@ -72,7 +70,7 @@ public class AppController {
 	}
 
 	@PostMapping("/applicant/update/{id}")
-	public ModelAndView updateApplicant(@PathVariable long id, @Valid @ModelAttribute Applicant applicant, BindingResult result) {
+	public ModelAndView updateApplicant(@ModelAttribute FormData formData, @PathVariable long id, @Valid @ModelAttribute Applicant applicant, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
 
 		//applicant = service.findApplicantById(id);
@@ -93,7 +91,23 @@ public class AppController {
 				oldApplicant.setPhone(applicant.getPhone());
 				oldApplicant.setSource(applicant.getSource());
 				oldApplicant.setDateOfBirth(applicant.getDateOfBirth());
+
+				//updating interests
+				service.resetApplicantInterests(oldApplicant);
+
+				if(formData.getCheckBoxSelection() != null && !formData.getCheckBoxSelection().isEmpty())
+				{
+					var checkBox = formData.getCheckBoxSelection();
+					for (String box : checkBox) 
+					{
+						Interest i = new Interest(oldApplicant);
+						i.setTopic(box);
+						service.createInterest(i);
+					}				
+				}
+
 				service.updateApplicant(oldApplicant);
+				service.refreshApplicant(oldApplicant);
 				mv.setViewName("applicant_view");
 				mv.addObject("applicant", oldApplicant);
 			}
@@ -111,10 +125,19 @@ public class AppController {
 		return mv;
 	}
 	
-	@GetMapping("/find-applicant-by-first-name/{name}")
+	/*@GetMapping("/find-applicant-by-first-name/{name}")
 	public ModelAndView listByFirstName(@PathVariable String name) {
 		ModelAndView mv = new ModelAndView("person-list");
 		mv.addObject("applicant", service.findApplicantByFirstName(name));
+
+		return mv;
+	}*/
+
+	@GetMapping({ "/applicant/result/{id}"})
+	public ModelAndView resultApplicant(@PathVariable long id) {
+		ModelAndView mv = new ModelAndView("application_result");
+		Applicant applicant = service.findApplicantById(id);
+		mv.addObject("applicant", applicant);
 
 		return mv;
 	}
@@ -132,7 +155,9 @@ public class AppController {
 	public ModelAndView editApplicant(@PathVariable long id) {
 		ModelAndView mv = new ModelAndView("applicant_edit");
 		Applicant applicant = service.findApplicantById(id);
+		FormData formData = new FormData();
 		mv.addObject("applicant", applicant);
+		mv.addObject("formData", formData);
 
 		return mv;
 	}
@@ -140,6 +165,7 @@ public class AppController {
 	@GetMapping("/applicant/delete/{id}")
 	public ModelAndView deleteApplicant(@PathVariable long id) {
 		ModelAndView mv = new ModelAndView("applicant_list");
+	
 		service.deleteApplicant(id);
 		mv.addObject("applicants", service.findAllApplicants()); 
 		return mv;

@@ -51,7 +51,6 @@ public class Applicant {
 
 	@Column(name = "phone")
 	@Size(min = 10, max=10)
-	//@NotEmpty
 	private String phone;
 
 	@OneToMany(mappedBy = "applicant", fetch=FetchType.EAGER)

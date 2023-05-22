@@ -25,7 +25,7 @@
                             <th><span th:text="#{db_body_phone}"></span></th>
                             <th><span th:text="#{db_body_dob}"></span></th>
                             <th><span th:text="#{db_body_source}"></span></th>
-                            <th><span th:text="Interests"></span></th>
+                            <th><span th:text="#{db_body_interests}"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,13 +34,18 @@
                             <td><span th:text="${applicant.email}"></span></td>
                             <td><span th:text="${applicant.phone}"></span></td>
                             <td><span th:text="${#temporals.format(applicant.dateOfBirth, 'dd.MM.yyyy')}"></span></td>
-                            <!--<td><span th:text="${applicant.dateOfBirth}"></span></td>-->
                             <td><span th:text="${applicant.source}"></span></td>
                             <td>
+                                <div th:unless="${#lists.isEmpty(applicant.interests)}">
                                 <span th:each = "interest, status : ${applicant.interests}"> <!--repeats the span-->
                                     <span th:if = "${status.last}" th:text = "${interest.topic} + '.'"></span>
                                     <span th:unless = "${status.last}" th:text = "${interest.topic} + ', '"></span>
                                 </span>
+                                </div>
+
+                                <div th:if="${#lists.isEmpty(applicant.interests)}">
+                                    <span th:text="#{db_na}"></span>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -55,7 +60,7 @@
             </p>
             
             <br>
-            <p><span th:if="${#locale.language == 'en'}"><a href = "?language=tr"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a href = "?language=en"><img src="/img/english.svg.png" width="25"></a></span> | <a href="/applicant/new"><span th:text="#{applicant_form}"></span></a> | <a href="/list-applicants"><span th:text="#{applicant_list}"></span></a></p>
+            <p><span th:if="${#locale.language == 'en'}"><a th:href = "@{'/applicant/result/' + ${applicant.id} + '?language=tr'}"><img src="/img/turkish.svg.png" width="20"></a></span> <span> </span> <span th:if="${#locale.language == 'tr'}"><a th:href = "@{'/applicant/result/' + ${applicant.id} + '?language=en'}"><img src="/img/english.svg.png" width="25"></a></span> | <a href="/applicant/new"><span th:text="#{applicant_form}"></span></a> | <a href="/list-applicants"><span th:text="#{applicant_list}"></span></a></p>
             
             <h3 style="margin-top: 70px;"><span th:text="#{group}"></span></h3>
            

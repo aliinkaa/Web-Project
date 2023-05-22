@@ -60,4 +60,15 @@ public class AppService {
 		applicantRepository.refresh(applicant);
 	}
 
+	public void resetApplicantInterests(Applicant applicant)
+	{
+		/*List<Interest> interests = interestRepository.findByApplicantId(applicant.getId());
+		for(int a=0; a < interests.size(); a++)
+		{
+
+			interestRepository.delete(interests.get(a).getId());
+		}*/
+		interestRepository.deleteByApplicantId(applicant.getId());
+	}
+
 }

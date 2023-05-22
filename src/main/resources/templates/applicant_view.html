@@ -22,6 +22,7 @@
                             <th><span th:text="#{db_body_dob}"></span></th>
                             <th><span th:text="#{db_body_age}"></span></th>
                             <th><span th:text="#{db_body_source}"></span></th>
+                            <th><span th:text="#{db_body_interests}"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,18 @@
                             <td><span th:text="${#temporals.format(applicant.dateOfBirth, 'dd.MM.yyyy')}"></span></td>
                             <td><span th:text="${applicant.applicantAge}"></span></td>
                             <td><span th:text="${applicant.source}"></span></td>
+                            <td>
+                                <div th:unless="${#lists.isEmpty(applicant.interests)}">
+                                <span th:each = "interest, status : ${applicant.interests}"> <!--repeats the span-->
+                                    <span th:if = "${status.last}" th:text = "${interest.topic} + '.'"></span>
+                                    <span th:unless = "${status.last}" th:text = "${interest.topic} + ', '"></span>
+                                </span>
+                                </div>
+    
+                                <div th:if="${#lists.isEmpty(applicant.interests)}">
+                                    <strong><span th:text="#{db_na}"></span></strong>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

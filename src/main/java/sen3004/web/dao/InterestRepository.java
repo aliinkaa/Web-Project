@@ -31,12 +31,12 @@ public class InterestRepository
 	}
 
 	public void deleteByApplicantId(long id) {
-		entityManager.createQuery("delete from interest where applicant.id = :id")
+		entityManager.createQuery("delete from Interest where applicant.id = :id")
 		.setParameter("id", id).executeUpdate();
 	}
 
     public List<Interest> findByApplicantId(long id) {
-		return entityManager.createQuery("from interest where applicant.id = :id", Interest.class)
+		return entityManager.createQuery("from Interest where applicant.id = :id", Interest.class)
 		.setParameter("id", id).getResultList();
 	}
 }
