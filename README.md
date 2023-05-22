@@ -5,7 +5,7 @@
 - Thymeleaf used.
 - JPA is used for database interactions.
 - English and Turkish previews avaliable for each view.
-
+-------------------------------------------------------
 - Form submission view.
 
 ![Submission Form View](formView.JPG)
