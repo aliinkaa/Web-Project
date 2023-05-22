@@ -1,5 +1,6 @@
-# WebProject
+# Web Development - Term Project
 - A simple localized form submission with database interactions. Made with Spring Boot framework, as a project for my Web Development uni course. 
+-------------------------------------------------------
 - Database is implemented using an in-memory H2 database.
 - HTMLs done by the other project member.
 - Thymeleaf used.
