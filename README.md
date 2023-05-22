@@ -5,4 +5,10 @@
 - Thymeleaf used.
 
 - Form submission view.
-![alt text](https://github.com/[aliinka]/[WebProject]/blob/[main]/formView.jpg?raw=true)
+![Submission Form View](formView.JPG)
+
+- Successful submission result view.
+![Result View](resultView.JPG)
+
+- Database user interface.
+![Database View](dbListView.JPG)
