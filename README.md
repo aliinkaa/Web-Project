@@ -5,4 +5,4 @@
 - Thymeleaf used.
 
 - Form submission view.
-![alt text](https://github.com/[aliinka]/[WebProject]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/[aliinka]/[WebProject]/blob/[main]/formView.jpg?raw=true)
