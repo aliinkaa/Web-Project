@@ -9,12 +9,12 @@
 -------------------------------------------------------
 - Form submission view.
 
-![Submission Form View](formView.JPG)
+![Submission Form View](readme/formView.JPG)
 
 - Successful submission result view.
 
-![Result View](resultView.JPG)
+![Result View](readme/resultView.JPG)
 
 - Database user interface.
 
-![Database View](dbListView.JPG)
+![Database View](readme/dbListView.JPG)
